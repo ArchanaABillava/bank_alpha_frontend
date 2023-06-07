@@ -21,6 +21,7 @@ import { CalciComponent } from './components/calci/calci.component';
 import { LoanstatusComponent } from './components/loanstatus/loanstatus.component';
 import { LoantypeComponent } from './components/loantype/loantype.component';
 import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
+import { SampleComponent } from './sample/sample.component';
 
 
 
@@ -39,6 +40,7 @@ import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
     LoanstatusComponent,
     LoantypeComponent,
     LoanpdfComponent,
+    SampleComponent,
     
   ],
   imports: [
