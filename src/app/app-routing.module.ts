@@ -12,6 +12,8 @@ import { CalciComponent } from './components/calci/calci.component';
 import { LoanstatusComponent } from './components/loanstatus/loanstatus.component';
 import { LoantypeComponent } from './components/loantype/loantype.component';
 import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
+import { LoanreqComponent } from './components/loanreq/loanreq.component';
+import { LoanReqDetailsComponent } from './components/loan-req-details/loan-req-details.component';
 
 
 const routes: Routes = [
@@ -25,7 +27,9 @@ const routes: Routes = [
   {path:'calci',component:CalciComponent},
   {path:'status',component:LoanstatusComponent},
   {path:'loantype',component:LoantypeComponent},
-  {path:'loanpdf',component:LoanpdfComponent}
+  {path:'loanpdf',component:LoanpdfComponent},
+  {path:'loanreq',component:LoanreqComponent},
+  {path:'loandetails/:loanId',component:LoanReqDetailsComponent}
   
 
 ];

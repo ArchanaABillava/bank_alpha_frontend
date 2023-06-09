@@ -53,7 +53,7 @@ export class NavbarComponent {
 
         this.cust_name = this.users["userName"]
         this.initials =this.cust_name.charAt(0).toUpperCase();
-        console.log(this.users);
+        console.log(this.initials);
       });
     }
     

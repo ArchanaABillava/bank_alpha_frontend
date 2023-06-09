@@ -1,12 +1,12 @@
-
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { catchError, forkJoin, throwError } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserstoreService } from 'src/app/services/userstore.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,8 +24,7 @@ export class LoandetailsComponent {
   type: any;
   selectedFiles!: File[];
   files: File[] = [];
-  section1: boolean = true
-  section2: boolean = false
+
 
 
 
@@ -34,7 +33,8 @@ export class LoandetailsComponent {
     private userStore: UserstoreService,
     private auth: AuthService,
     private toast: NgToastService,
-    private router: Router
+    private shared:SharedService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -50,14 +50,17 @@ export class LoandetailsComponent {
       monthlyIncome: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
       annualIncome: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
       otherEmi: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
-      loanPurpose: ['', Validators.required],
-      propertyLoc: ['', Validators.required],
-      propertyArea: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
-      propertyValue: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
-
+      loanPurpose: ['',],
+      propertyLoc: ['',],
+      propertyArea: ['', [Validators.pattern('^[0-9]*$')]],
+      propertyValue: ['', [Validators.pattern('^[0-9]*$')]],
     });
 
+   
+
   }
+
+  
 
   onFileSelected(event: any): void {
     this.files = event.target.files;
@@ -90,6 +93,33 @@ export class LoandetailsComponent {
   // }
 
 
+  shouldApplyValidators() : boolean
+  {
+    let shouldValidate = false;
+    const propArea = this.loanBasic.get('propertyArea'); 
+    const propLoc = this.loanBasic.get('propertyLoc'); 
+    const propVal = this.loanBasic.get('propertyValue'); 
+    const loanPurpose = this.loanBasic.get('loanPurpose'); 
+    if (this.type == 'houseLoan') 
+    if(propArea && propLoc && propVal && loanPurpose)
+    {
+      propArea.setValidators([Validators.required]);
+      propLoc.setValidators([Validators.required]);
+      propVal.setValidators([Validators.required]);
+      loanPurpose.setValidators([Validators.required]);
+      shouldValidate = true;
+    } 
+     else{
+      propArea?.clearValidators();
+      propLoc?.clearValidators();
+      propVal?.clearValidators();
+      loanPurpose?.clearValidators();
+      shouldValidate = false;
+    }
+    
+    return shouldValidate
+  }
+
 
   onChange(event: any) {
     const target = event.target as HTMLInputElement;
@@ -110,13 +140,11 @@ export class LoandetailsComponent {
         }
       );
     }
+    this.shouldApplyValidators();
   }
 
 
-  onSection() {
-    this.section1 = !this.section1;
-    this.section2 = !this.section2;
-  }
+ 
 
   // onSubmit() {
   //   if (this.loanBasic.valid) {
@@ -139,6 +167,7 @@ export class LoandetailsComponent {
     {
       const formData = new FormData();
       console.log(this.loanBasic.value)
+ 
 
       for (const file of this.files) {
         formData.append('accountNumber', this.accountNum);
@@ -166,6 +195,7 @@ export class LoandetailsComponent {
           console.log(response1)
           this.toast.success({detail:"Success",summary:response1.message,duration:5000})
           console.log(response2)
+          this.router.navigate(["loanForm"])
         },
         error => {
           console.log(error.error.message);
@@ -175,8 +205,6 @@ export class LoandetailsComponent {
     else {
       this.loanBasic.markAllAsTouched();
     }
-    this.router.navigate(["loanpdf"])
-  
   }
   
 

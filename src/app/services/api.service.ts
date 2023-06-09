@@ -8,12 +8,17 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private baseUrl: string = "https://localhost:7080/api/Loan/";
   private fileurl = "https://localhost:7080/api/Files";
+  private loanUrl="https://localhost:7080/api/Loan/GetLoanDetails";
 
   constructor(private http:HttpClient) { }
 
   getInterestByLoanType(loanType: string): Observable<number> {
     const url = `${this.baseUrl}getInterest?loanType=${loanType}`; 
     return this.http.get<number>(url);
+  }
+  getLoanDetailsById(loanId: Int16Array): Observable<any> {
+    const url = `${this.loanUrl}getInterest?loanType=${loanId}`; 
+    return this.http.get<any>(url);
   }
 
   applyLoan(loanObj:any){

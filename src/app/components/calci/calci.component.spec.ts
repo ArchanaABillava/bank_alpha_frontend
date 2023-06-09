@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CalciComponent } from './calci.component';
 
 describe('CalciComponent', () => {
@@ -7,9 +6,9 @@ describe('CalciComponent', () => {
   let fixture: ComponentFixture<CalciComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CalciComponent ]
-    })
+    await TestBed.configureTestingModule({ 
+      declarations: [ CalciComponent ]  
+    })                                         
     .compileComponents();
 
     fixture = TestBed.createComponent(CalciComponent);

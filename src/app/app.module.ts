@@ -21,7 +21,11 @@ import { CalciComponent } from './components/calci/calci.component';
 import { LoanstatusComponent } from './components/loanstatus/loanstatus.component';
 import { LoantypeComponent } from './components/loantype/loantype.component';
 import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
-import { Sample2Component } from './sample2/sample2.component';
+
+import { LoanreqComponent } from './components/loanreq/loanreq.component';
+import { LoanReqDetailsComponent } from './components/loan-req-details/loan-req-details.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+
 
 
 
@@ -40,8 +44,10 @@ import { Sample2Component } from './sample2/sample2.component';
     LoanstatusComponent,
     LoantypeComponent,
     LoanpdfComponent,
-    Sample2Component,
-    
+    LoanreqComponent,
+    LoanReqDetailsComponent,
+    UserDetailsComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -14,5 +14,10 @@ export class LoantypeComponent {
     // this.router.navigate(["loantype"])
     this.router.navigate(["applyLoan"])
   }
+  routeToCalci(){
+    // this.router.navigate(["loantype"])
+    this.router.navigate(["calci"])
+  }
+
 
 }

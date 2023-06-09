@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
 
 // import "./index";
 @Component({
@@ -21,7 +22,13 @@ export class LoaneligibleComponent {type:any;
   color: string = "danger";
   isLoanType = false;
 
-  constructor(private toast:NgToastService) { }
+  constructor(private toast:NgToastService, private router: Router) { }
+  
+ 
+  routeToLoan(){
+    // this.router.navigate(["loantype"])
+    this.router.navigate(["loantype"])
+  }
 
   
  
