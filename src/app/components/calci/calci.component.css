@@ -33,8 +33,9 @@
 
 .loan-calculator form input{
     font-size: 20px;
-    padding: 8px 24px;
+    padding: 2px 4px;
     width: 100%;
+   
 }
 
 .loan-calculator .result{

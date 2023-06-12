@@ -14,6 +14,7 @@ import { LoantypeComponent } from './components/loantype/loantype.component';
 import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
 import { LoanreqComponent } from './components/loanreq/loanreq.component';
 import { LoanReqDetailsComponent } from './components/loan-req-details/loan-req-details.component';
+import { AccDetailsComponent } from './components/acc-details/acc-details.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'loantype',component:LoantypeComponent},
   {path:'loanpdf',component:LoanpdfComponent},
   {path:'loanreq',component:LoanreqComponent},
-  {path:'loandetails/:loanId',component:LoanReqDetailsComponent}
+  {path:'loandetails/:loanId',component:LoanReqDetailsComponent},
+  {path:'AccountDetails/:accountNum',component:AccDetailsComponent}
   
 
 ];

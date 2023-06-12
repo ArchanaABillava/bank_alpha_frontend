@@ -21,18 +21,20 @@ export class LoanreqComponent {
     this.getAllLoanReq();
   }
   ngOnInit():void{
-
+    
   }
   getAllLoanReq()
-  {
-    this.http.get("https://localhost:7080/api/Loan/GetLoanDetails")
-    .subscribe((resultData:any)=>
     {
-      this.isResultLoaded=true;
-      console.log(resultData);
-      this.LoanArray=resultData;
-    });
+      this.http.get("https://localhost:7080/api/Loan/getAllLoans")
+      .subscribe((resultData:any)=>
+      {
+        this.isResultLoaded=true;
+        console.log(resultData);
+        this.LoanArray=resultData;
+      });
+    }
   }
+ 
 
 
-}
+

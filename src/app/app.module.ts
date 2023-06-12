@@ -25,6 +25,7 @@ import { LoanpdfComponent } from './components/loanpdf/loanpdf.component';
 import { LoanreqComponent } from './components/loanreq/loanreq.component';
 import { LoanReqDetailsComponent } from './components/loan-req-details/loan-req-details.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { AccDetailsComponent } from './components/acc-details/acc-details.component';
 
 
 
@@ -47,6 +48,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     LoanreqComponent,
     LoanReqDetailsComponent,
     UserDetailsComponent,
+    AccDetailsComponent,
 
   ],
   imports: [

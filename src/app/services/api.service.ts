@@ -9,6 +9,9 @@ export class ApiService {
   private baseUrl: string = "https://localhost:7080/api/Loan/";
   private fileurl = "https://localhost:7080/api/Files";
   private loanUrl="https://localhost:7080/api/Loan/GetLoanDetails";
+  private checkurl = "https://localhost:7080/api/LoanEligible/checkEligible";
+  private calciUrl="https://localhost:7080/api/LoanCalculator/calculateEMI";
+  
 
   constructor(private http:HttpClient) { }
 
@@ -24,6 +27,12 @@ export class ApiService {
   applyLoan(loanObj:any){
     const url = `${this.baseUrl}applyLoan`;
     return this.http.post<any>(url,loanObj);
+  }
+  checkEligible(checkObJ:any){
+    return this.http.post<any>(this.checkurl,checkObJ);
+  }
+  calculateEMI(calObJ:any){
+    return this.http.post<any>(this.calciUrl,calObJ);
   }
 
   uploadFile(formData:any){
