@@ -1,32 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { LoanService } from 'src/app/services/loan.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { UserstoreService } from 'src/app/services/userstore.service';
+import jsPDF from 'jspdf';
+import { HTMLOptions } from 'jspdf';
+
+
+
 
 @Component({
   selector: 'app-loan-req-details',
   templateUrl: './loan-req-details.component.html',
   styleUrls: ['./loan-req-details.component.css']
 })
-export class LoanReqDetailsComponent implements OnInit {
-  loanId: number=0;
-  loanDetails: any;
+export class LoanReqDetailsComponent  {
+  @ViewChild('htmlData', { static: false }) htmlData!: ElementRef;
+  type: any;
+  emptype: any;
+  accountnumber: any;
+  role: any;
+  users: any = [];
+  loans: any = [];
 
-  constructor(private route: ActivatedRoute, private loanService: LoanService) {
-    this.loanDetails = null;
-   }
+  constructor(private auth: AuthService, private userStore: UserstoreService, private api: ApiService) {
 
+  }
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.loanId = +params['loanId'];
-      this.loadLoanDetails(this.loanId);
+    this.userStore.getAccountFromStore().subscribe(val => {
+      let accountFromToken = this.auth.getAccountNumFromToken();
+      this.accountnumber = val || accountFromToken;
+    })
+
+    this.auth.getUserDetails(this.accountnumber).subscribe(res => {
+      this.users = res;
+      // this.cust_name = this.users["userName"]
+      this.emptype = this.users["empType"];
+
+      console.log(this.users);
+    });
+    this.api.getLoanDetails(this.accountnumber).subscribe(res => {
+      this.loans = res;
+      console.log(this.loans);
+      this.type = this.loans["loanType"];
+    }
+      , (err) => {
+        console.log(err);
+      })
+      
+  }
+
+  downloadPdf() {
+    const pdf = new jsPDF();
+    const options: HTMLOptions = {
+      html2canvas: { scale: 0.185 },
+      // margin: [10, 10, 10, 10], 
+      filename: `${this.accountnumber}loanApplication.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+
+
+    };
+    const content = this.htmlData.nativeElement;
+    pdf.html(content, options).save(`${this.accountnumber}loanApplication.pdf`).then(() => {
+      const pdfBlob = pdf.output('blob');
+      const formData = new FormData();
+      formData.append('file', pdfBlob, options.filename);
+      this.api.sendFile(formData).subscribe(res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      })
     });
   }
 
-  loadLoanDetails(loanId: number) {
-    this.loanService.getLoanDetail(loanId).subscribe(data => {
-      this.loanDetails = data;
-    });
-  }
+
+
+ 
 
 }

@@ -9,13 +9,13 @@ import { HttpClient} from '@angular/common/http';
 export class LoanreqComponent {
   LoanArray:any[]=[];
   isResultLoaded=false;
-  slNo:number=1;
-  accountNumber:number=0;
-  loanID:number=0;
-  otherEMI:number=0;
-  loanType:string="";
-  loanAmount:number=0;
-  tenure:number=0;
+  // slNo:number=1;
+  // accountNumber:number=0;
+  // loanID:number=0;
+  // otherEMI:number=0;
+  // loanType:string="";
+  // loanAmount:number=0;
+  // tenure:number=0;
   constructor(private http:HttpClient)
   {
     this.getAllLoanReq();

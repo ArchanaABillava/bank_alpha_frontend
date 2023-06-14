@@ -9,11 +9,11 @@
           <small
           *ngIf="calculate.get('loanAmount')?.invalid && calculate.get('loanAmount')?.touched"
           class="error">
-          Loan Amount is required.
+          Loan amount must be minimum of 50000.
       </small>
       <ng-container
       *ngIf="calculate.controls['loanAmount'].dirty && calculate.hasError('pattern','loanAmount')">
-      <small class="error" >Enter proper credentials</small>
+      <small class="error" >Enter proper credentials.</small>
   </ng-container>
       
         </div>
@@ -24,11 +24,11 @@
           <small
           *ngIf="calculate.get('interest')?.invalid && calculate.get('interest')?.touched"
           class="error">
-           Interest Rate is required.
+           Interest Rate required .
       </small>
       <ng-container
       *ngIf="calculate.controls['interest'].dirty && calculate.hasError('pattern','interest')">
-      <small class="error" >Enter proper credentials</small>
+      <small class="error" >Enter proper credentials.</small>
   </ng-container>
         </div>
   
@@ -38,7 +38,7 @@
           <small
           *ngIf="calculate.get('tenure')?.invalid && calculate.get('tenure')?.touched"
           class="error">
-          Tenure is required and must be in range of 3-300 months
+          Tenure must be in range of 3-300 months.
       </small>
       <ng-container
       *ngIf="calculate.controls['tenure'].dirty && calculate.hasError('pattern','tenure')">
@@ -67,7 +67,7 @@
   
         <button (click)="onSubmit()" class="calculate-btn1">CALCULATE</button>
         <!-- <button  (click)="routeToLoanForm()" class="calculate-btn2">APPLY LOAN</button> -->
-         <button  class="calculate-btn2">APPLY LOAN</button> 
+         <!-- <button  class="calculate-btn2">APPLY LOAN</button>  -->
         <!-- <button class="btn bg-primary text-light"><a routerLink="Loanstatus"  class="btn-dec">View now</a></button>
         <button routerLink="Loantype">Go to Calculator</button> -->
       </div>

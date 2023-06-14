@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LoanService } from 'src/app/services/loan.service';
+
+import { HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -9,23 +9,27 @@ import { LoanService } from 'src/app/services/loan.service';
   styleUrls: ['./acc-details.component.css']
 })
 export class AccDetailsComponent {
-  accountNum:any;
-  constructor(
-    private route:ActivatedRoute,
-    private loan:LoanService
-  ){}
-
-  ngOnInit(){
-    this.accountNum=this.route.snapshot.params['accountNum'];
-    this.getOne();
-  }
-
-  getOne()
+  
+LoanArray:any[]=[];
+  isResultLoaded=false;
+  constructor(private http:HttpClient)
   {
-    this.loan.getOne(this.accountNum).subscribe(data=>
-      {
-        console.log(data);
-      })
+    this.getUserDetail();
   }
+  
+  ngOnInit():void{
+    
+  }
+
+  getUserDetail()
+    {
+      this.http.get("https://localhost:7080/api/LoanReq/getByAccountNumUserDetails")
+      .subscribe((resultData:any)=>
+      {
+        this.isResultLoaded=true;
+        console.log(resultData);
+        this.LoanArray=resultData;
+      });
+    }
 
 }

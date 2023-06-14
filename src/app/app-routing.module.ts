@@ -31,7 +31,8 @@ const routes: Routes = [
   {path:'loanpdf',component:LoanpdfComponent},
   {path:'loanreq',component:LoanreqComponent},
   {path:'loandetails/:loanId',component:LoanReqDetailsComponent},
-  {path:'AccountDetails/:accountNum',component:AccDetailsComponent}
+  {path:'AccountDetails/:accountNum',component:AccDetailsComponent},
+  {path:'loanForm',component:LoanReqDetailsComponent}
   
 
 ];

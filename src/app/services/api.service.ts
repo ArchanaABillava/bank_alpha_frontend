@@ -19,10 +19,7 @@ export class ApiService {
     const url = `${this.baseUrl}getInterest?loanType=${loanType}`; 
     return this.http.get<number>(url);
   }
-  getLoanDetailsById(loanId: Int16Array): Observable<any> {
-    const url = `${this.loanUrl}getInterest?loanType=${loanId}`; 
-    return this.http.get<any>(url);
-  }
+ 
 
   applyLoan(loanObj:any){
     const url = `${this.baseUrl}applyLoan`;
@@ -37,5 +34,13 @@ export class ApiService {
 
   uploadFile(formData:any){
     return this.http.post<any>(this.fileurl,formData);
+  }
+  sendFile(formData:any){
+    return this.http.post<any>(`${this.fileurl}/sendFile`,formData);
+  }
+  
+  getLoanDetails(accountnum:string){
+    const url = `${this.baseUrl}getLoanByAccountNum?accountnum=${accountnum}`; 
+    return this.http.get<any>(url);
   }
 }
